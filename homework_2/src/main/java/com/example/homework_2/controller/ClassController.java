@@ -1,19 +1,22 @@
 package com.example.homework_2.controller;
 
+import com.example.homework_2.model.Course;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/class")
 public class ClassController {
     @RequestMapping("/getMyClass/{userId}")
-    public String getMyClass(@PathVariable("userId")String userId){
-        return "";
+    public ArrayList<Course> getMyClass(@PathVariable("userId")String userId){
+        return null;
     }
     @RequestMapping("/getOtherClass/{userId}")
     public String getOtherClass(@PathVariable("userId")String userId){
-        return "";
+        return null;
     }
     @RequestMapping("/selectClass/{userId}/{courseId}")
     public boolean addClass(@PathVariable("userId")String userId,@PathVariable("courseId")String courseId){
@@ -24,8 +27,8 @@ public class ClassController {
         return false;
     }
     @RequestMapping("/getAll")
-    public String getAllClass(){
-        return "";
+    public ArrayList<Course> getAllClass(){
+        return null;
     }
     @RequestMapping("/getAllSelect")
     public String getAllSelect(){

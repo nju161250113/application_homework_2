@@ -1,8 +1,11 @@
 package com.example.homework_2.controller;
 
+import com.example.homework_2.model.Student;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/student")
@@ -13,8 +16,8 @@ public class LoginController {
         return false;
     }
     @RequestMapping("/getAll")
-    public String getAllStudent(){
-        return "";
+    public ArrayList<Student> getAllStudent(){
+        return null;
     }
 
 }
