@@ -1,8 +1,7 @@
 package com.example.homework_2.repository;
 
-import com.example.homework_2.entity.ChooseCourse;
-import com.example.homework_2.entity.Course;
-import com.example.homework_2.entity.Student;
+import com.example.homework_2.entity.*;
+
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
