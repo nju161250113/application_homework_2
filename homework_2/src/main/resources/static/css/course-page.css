@@ -1,0 +1,34 @@
+
+#container {
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+}
+
+table {
+  border-collapse: collapse;
+  width: 45%;
+  table-layout: fixed;
+  text-align: center;
+}
+
+thead tr {
+  height: 50px;
+  background-color: #3f3f3f;
+  color: white;
+  border-right: solid 1px #3f3f3f;
+}
+
+tbody {
+  border-left: solid 1px #3f3f3f;
+}
+
+tbody tr {
+  height: 40px;
+  border-bottom: solid 1px #3f3f3f;
+}
+
+tbody tr td {
+  border-right: solid 1px #3f3f3f;
+}
