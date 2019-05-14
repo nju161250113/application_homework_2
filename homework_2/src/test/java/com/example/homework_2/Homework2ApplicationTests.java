@@ -1,5 +1,7 @@
 package com.example.homework_2;
 
+import com.example.homework_2.entity.Student;
+import com.example.homework_2.repository.StudentRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +25,8 @@ public class Homework2ApplicationTests {
     @Qualifier("secondaryJdbcTemplate")
     protected JdbcTemplate jdbcTemplate2;
 
+    @Autowired
+    private StudentRepository studentRepository;
     @Test
     public void test() throws Exception {
 
@@ -38,6 +42,11 @@ public class Homework2ApplicationTests {
         // 查一下第一个数据源中是否有两条数据，验证插入是否成功
         Assert.assertEquals("13", jdbcTemplate2.queryForObject("select count(1) from goods", String.class));
 
+    }
+    @Test
+    public void test2(){
+        Student student = studentRepository.findById("B1");
+        Assert.assertEquals("123",student.getPassword());
     }
 
 
