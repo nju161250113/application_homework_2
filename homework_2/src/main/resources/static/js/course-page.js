@@ -113,25 +113,29 @@
         });
   }
 
-  axios.get('/home?stu_id=' + stuId)
+  axios.get('/getMyClass/' + stuId)
       .then(function (response) {
-        for (let course of response.data) {
-          addCourseRow(course.id, course.name, myCoursesTBody, '退选',
-              removeCourse.bind(this, course.id), false);
-        }
+          if (response.data != null) {
+              for (let course of response.data) {
+                  addCourseRow(course.courseId, course.courseName, myCoursesTBody, '退选',
+                      removeCourse.bind(this, course.id), false);
+              }
+          }
       })
       .catch(function (error) {
         alert('网络错误');
         console.log(error);
       });
 
-  axios.get('/courses?stu_id=' + stuId)
+  axios.get('/getOtherClass/' + stuId)
       .then(function (response) {
-        let allCourses = response.data;
-        for (let course of allCourses) {
-          addCourseRow(course.course.id, course.course.name, allCoursesTBody, '选择',
-              chooseCourse.bind(this, course.course.id, course.course.name), course.select);
+        if (response.data != null) {
+            for (let course of response.data) {
+                addCourseRow(course.courseId, course.courseName, allCoursesTBody, '选择',
+                    chooseCourse.bind(this, course.courseId, course.courseName), course.select);
+            }
         }
+
       })
       .catch(function (error) {
         alert('网络错误');

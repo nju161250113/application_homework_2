@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.*;
 public class JumpController {
     @RequestMapping("/")
     public String loginPage(){
-        return "/login.html";
+        return "login";
+    }
+
+    @RequestMapping("/coursepage")
+    public String coursePage() {
+        return "course-page";
     }
 }
