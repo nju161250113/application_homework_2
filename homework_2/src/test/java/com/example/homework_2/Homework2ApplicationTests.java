@@ -16,19 +16,17 @@ import javax.sql.DataSource;
 public class Homework2ApplicationTests {
 
     @Autowired
-    @Qualifier("primaryDataSource")
-    protected DataSource dataSource1;
+    @Qualifier("primaryJdbcTemplate")
+    protected JdbcTemplate jdbcTemplate1;
 
     @Autowired
-    @Qualifier("secondaryDataSource")
-    protected DataSource dataSource2;
+    @Qualifier("secondaryJdbcTemplate")
+    protected JdbcTemplate jdbcTemplate2;
 
     @Test
     public void test() throws Exception {
 
         // 往第一个数据源中插入两条数据
-        JdbcTemplate jdbcTemplate1=new JdbcTemplate(dataSource1);
-        JdbcTemplate jdbcTemplate2=new JdbcTemplate(dataSource2);
         jdbcTemplate1.update("insert into students(name,password) values(?, ?)", "邵靖", "aaa");
 
 //        // 往第二个数据源中插入一条数据，若插入的是第一个数据源，则会主键冲突报错
