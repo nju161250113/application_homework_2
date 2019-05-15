@@ -24,7 +24,7 @@ public class StudentDaoMySQLImplTest {
 
     @Test
     public void addStudent() {
-        assertEquals(true,studentDao.addStudent("1612500112","shao"));
+        assertEquals(true,studentDao.addStudent("A100","邵靖"));
 
     }
 }

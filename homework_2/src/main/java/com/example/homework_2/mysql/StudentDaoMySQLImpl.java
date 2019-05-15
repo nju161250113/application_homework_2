@@ -30,7 +30,7 @@ public class StudentDaoMySQLImpl implements StudentDao {
         Iterator it = rows.iterator();
         while(it.hasNext()) {
             Map m=(Map)it.next();
-            Student  stu=new Student((String)m.get("number"),(String)m.get("password"),(String)m.get("name"),"B");
+            Student  stu=new Student((String)m.get("number"),(String)m.get("password"),(String)m.get("name"),"建筑学院");
             list.add(stu);
         }
         return XmlUtils.toXml(list);

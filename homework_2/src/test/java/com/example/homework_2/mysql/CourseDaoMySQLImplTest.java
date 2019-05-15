@@ -25,7 +25,7 @@ public class CourseDaoMySQLImplTest {
 
     @Test
     public void selectCourse() {
-        assertEquals(true,courseDaoMysql.selectCourse("161250112","1"));
+        assertEquals(true,courseDaoMysql.selectCourse("A1","A1"));
     }
 
     @Test
