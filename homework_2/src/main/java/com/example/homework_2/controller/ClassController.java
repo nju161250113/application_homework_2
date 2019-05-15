@@ -1,6 +1,8 @@
 package com.example.homework_2.controller;
 
 import com.example.homework_2.model.Course;
+import com.example.homework_2.model.DetailStuCourse;
+import com.example.homework_2.model.StuCourse;
 import com.example.homework_2.service.CourseService;
 import com.example.homework_2.service.CourseServiceImpl;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,7 +36,7 @@ public class ClassController {
         return cs.getAll();
     }
     @RequestMapping("/getAllSelect")
-    public String getAllSelect(){
-        return "";
+    public ArrayList<DetailStuCourse> getAllSelect(){
+        return cs.getAllSelect();
     }
 }
