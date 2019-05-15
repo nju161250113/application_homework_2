@@ -25,12 +25,12 @@ public class DataSourceConfig {
         return DataSourceBuilder.create().build();
     }
 
-    //oracle库
-    @Bean(name = "oracleDataSource")
-    @Qualifier("oracleDataSource")
-    @ConfigurationProperties(prefix = "spring.datasource.oracle")
-    public DataSource oracleDataSource() {
-        return DataSourceBuilder.create().build();
-    }
+//    //oracle库
+//    @Bean(name = "oracleDataSource")
+//    @Qualifier("oracleDataSource")
+//    @ConfigurationProperties(prefix = "spring.datasource.oracle")
+//    public DataSource oracleDataSource() {
+//        return DataSourceBuilder.create().build();
+//    }
 
 }

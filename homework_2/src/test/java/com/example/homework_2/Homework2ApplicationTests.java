@@ -14,21 +14,21 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class Homework2ApplicationTests {
 
-    @Autowired
-    private StudentRepository studentRepository;
-    @Autowired
-//    private StudentsRepository studentsRepository;
-
+//    @Autowired
+//    private StudentRepository studentRepository;
+//    @Autowired
+////    private StudentsRepository studentsRepository;
+//
+////    @Test
+////    public void test2(){
+////        com.example.homework_2.mysql.entity.Student student = studentsRepository.findById(1);
+////        Assert.assertEquals("123",student.getPassword());
+////    }
 //    @Test
-//    public void test2(){
-//        com.example.homework_2.mysql.entity.Student student = studentsRepository.findById(1);
-//        Assert.assertEquals("123",student.getPassword());
+//    public void test4(){
+//        Student student = studentRepository.findById("B1");
+//        Assert.assertEquals("亚瑟",student.getName());
 //    }
-    @Test
-    public void test4(){
-        Student student = studentRepository.findById("B1");
-        Assert.assertEquals("亚瑟",student.getName());
-    }
 
 
 }
