@@ -1,6 +1,6 @@
-package com.example.homework_2.repository;
+package com.example.homework_2.oracle.repository;
 
-import com.example.homework_2.entity.*;
+import com.example.homework_2.oracle.entity.*;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.CrudRepository;

@@ -1,4 +1,4 @@
-package com.example.homework_2.entity;
+package com.example.homework_2.oracle.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
