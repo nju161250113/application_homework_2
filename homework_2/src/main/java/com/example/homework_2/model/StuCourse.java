@@ -1,5 +1,8 @@
 package com.example.homework_2.model;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
+@XStreamAlias("stuCourse")
 public class StuCourse {
     private String studentId;
     private  String courseId;
