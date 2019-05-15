@@ -6,6 +6,21 @@
   justify-content: space-around;
 }
 
+a {
+  font-size: 50px;
+  text-underline: none;
+
+  margin: 20px auto 20px 10px;
+}
+
+a:link, a:visited, a:active {
+  color: black;
+}
+
+a:hover {
+  color: #bbbbbb;
+}
+
 table {
   border-collapse: collapse;
   width: 45%;

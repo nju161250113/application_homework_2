@@ -56,9 +56,9 @@
 
     for (let row of rows) {
       let td = row.firstChild,
-          id = parseInt(td.innerText);
+          id = td.innerText;
 
-      if (id === courseId) {
+      if (id === courseId.toString()) {
         let btn = row.children[2].firstChild;
         btn.disabled = disabled;
         break;
@@ -68,9 +68,9 @@
   
   
   function chooseCourse(courseId, courseName) {
-    axios.get('/select?stu_id=' + stuId + '&course_id=' + courseId)
+    axios.get('/selectClass/' + stuId + '/' + courseId)
         .then(function (response) {
-          if (Boolean(response.data)) {
+          if (response.data) {
             addCourseRow(courseId, courseName, myCoursesTBody, '退选', removeCourse.bind(this, courseId), false);
   
             toggleBtn(allCoursesTBody, true, courseId);
@@ -85,7 +85,7 @@
   }
   
   function removeCourse(courseId) {
-    axios.get('/cancle?course_id=' + courseId + '&stu_id=' + stuId)
+    axios.get('/returnClass/' + stuId + '/' + courseId)
         .then(function (response) {
           if (response.data) {
             // 删除已选课程列表中的这一行
@@ -93,9 +93,9 @@
 
             for (let row of rows) {
               let td = row.firstChild,
-                  id = parseInt(td.innerText);
+                  id = td.innerText;
     
-              if (id === courseId) {
+              if (id === courseId.toString()) {
                 row.remove();
                 break;
               }
@@ -113,34 +113,34 @@
         });
   }
 
-  axios.get('/getMyClass/' + stuId)
-      .then(function (response) {
-          if (response.data != null) {
-              for (let course of response.data) {
-                  addCourseRow(course.courseId, course.courseName, myCoursesTBody, '退选',
-                      removeCourse.bind(this, course.id), false);
-              }
-          }
-      })
-      .catch(function (error) {
-        alert('网络错误');
-        console.log(error);
-      });
-
-  axios.get('/getOtherClass/' + stuId)
-      .then(function (response) {
-        if (response.data != null) {
-            for (let course of response.data) {
-                addCourseRow(course.courseId, course.courseName, allCoursesTBody, '选择',
-                    chooseCourse.bind(this, course.courseId, course.courseName), course.select);
-            }
-        }
-
-      })
-      .catch(function (error) {
-        alert('网络错误');
-        console.log(error);
-      });
+  // axios.get('/getMyClass/' + stuId)
+  //     .then(function (response) {
+  //         if (response.data != null) {
+  //             for (let course of response.data) {
+  //                 addCourseRow(course.courseId, course.courseName, myCoursesTBody, '退选',
+  //                     removeCourse.bind(this, course.id), false);
+  //             }
+  //         }
+  //     })
+  //     .catch(function (error) {
+  //       alert('网络错误');
+  //       console.log(error);
+  //     });
+  //
+  // axios.get('/getOtherClass/' + stuId)
+  //     .then(function (response) {
+  //       if (response.data != null) {
+  //           for (let course of response.data) {
+  //               addCourseRow(course.courseId, course.courseName, allCoursesTBody, '选择',
+  //                   chooseCourse.bind(this, course.courseId, course.courseName), course.select);
+  //           }
+  //       }
+  //
+  //     })
+  //     .catch(function (error) {
+  //       alert('网络错误');
+  //       console.log(error);
+  //     });
   
   
 })();
