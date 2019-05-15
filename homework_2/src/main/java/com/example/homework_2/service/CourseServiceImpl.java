@@ -18,11 +18,15 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public ArrayList<Course> getMyCourse(String userId) {
+        ArrayList<Course>list=getAll();
+        ArrayList<Course>result=new ArrayList<>();
         return null;
     }
 
     @Override
     public ArrayList<Course> getOtherCourse(String userId) {
+        ArrayList<Course>list=getAll();
+        ArrayList<Course>result=new ArrayList<>();
         return null;
     }
 
