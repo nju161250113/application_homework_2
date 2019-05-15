@@ -6,7 +6,6 @@ import com.example.homework_2.model.StuCourse;
 import com.example.homework_2.utils.XmlUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 

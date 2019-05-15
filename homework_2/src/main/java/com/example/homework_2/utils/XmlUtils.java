@@ -3,6 +3,8 @@ package com.example.homework_2.utils;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
+import java.util.List;
+
 public class XmlUtils {
 
     /**
@@ -32,6 +34,14 @@ public class XmlUtils {
         XStream xStream = new XStream(new DomDriver());
         xStream.processAnnotations(obj.getClass());
         return xStream.toXML(obj);
+    }
+
+    public static  String toXml(List list) {
+        XStream xStream = new XStream(new DomDriver());
+        if(null!=list.get(0)){
+            xStream.processAnnotations(list.get(0).getClass());
+        }
+        return xStream.toXML(list);
     }
 
 }
