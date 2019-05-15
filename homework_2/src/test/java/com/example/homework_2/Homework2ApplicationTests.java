@@ -1,7 +1,7 @@
 package com.example.homework_2;
 
 import com.example.homework_2.oracle.entity.Student;
-import com.example.homework_2.mysql.repository.StudentsRepository;
+//import com.example.homework_2.mysql.repository.StudentsRepository;
 import com.example.homework_2.oracle.repository.StudentRepository;
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,13 +17,13 @@ public class Homework2ApplicationTests {
     @Autowired
     private StudentRepository studentRepository;
     @Autowired
-    private StudentsRepository studentsRepository;
+//    private StudentsRepository studentsRepository;
 
-    @Test
-    public void test2(){
-        com.example.homework_2.mysql.entity.Student student = studentsRepository.findById(1);
-        Assert.assertEquals("123",student.getPassword());
-    }
+//    @Test
+//    public void test2(){
+//        com.example.homework_2.mysql.entity.Student student = studentsRepository.findById(1);
+//        Assert.assertEquals("123",student.getPassword());
+//    }
     @Test
     public void test4(){
         Student student = studentRepository.findById("B1");
