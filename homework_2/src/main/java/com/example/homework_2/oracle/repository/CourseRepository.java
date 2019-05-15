@@ -1,6 +1,6 @@
-package com.example.homework_2.repository;
+package com.example.homework_2.oracle.repository;
 
-import com.example.homework_2.entity.Course;
+import com.example.homework_2.oracle.entity.Course;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
