@@ -21,13 +21,14 @@ public class CourseDaoMySQLImplTest {
         assertEquals("",courseDaoMysql.getAllCourse());
     }
 
-//    @Test
-//    public void selectCourse() {
-//    }
-//
-//    @Test
-//    public void returnCourse() {
-//    }
+    @Test
+    public void selectCourse() {
+        assertEquals(true,courseDaoMysql.selectCourse("A1","A1"));
+    }
+
+    @Test
+    public void returnCourse() {
+    }
 
     @Test
     public void getAllSelect() {
