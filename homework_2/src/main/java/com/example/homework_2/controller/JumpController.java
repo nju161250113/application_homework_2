@@ -14,4 +14,9 @@ public class JumpController {
     public String coursePage() {
         return "course-page";
     }
+
+    @RequestMapping("/statisticpage")
+    public String statisticPage() {
+        return "statistic";
+    }
 }
