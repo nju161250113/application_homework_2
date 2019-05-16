@@ -1,0 +1,17 @@
+
+
+#container {
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+#container .two-column {
+    width: 27%;
+}
+
+#container .four-column {
+    width: 40%;
+}

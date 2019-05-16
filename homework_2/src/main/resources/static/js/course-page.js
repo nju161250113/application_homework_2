@@ -68,7 +68,7 @@
   
   
   function chooseCourse(courseId, courseName) {
-    axios.get('/selectClass/' + stuId + '/' + courseId)
+    axios.get('/class/selectClass/' + stuId + '/' + courseId)
         .then(function (response) {
           if (response.data) {
             addCourseRow(courseId, courseName, myCoursesTBody, '退选', removeCourse.bind(this, courseId), false);
@@ -85,7 +85,7 @@
   }
   
   function removeCourse(courseId) {
-    axios.get('/returnClass/' + stuId + '/' + courseId)
+    axios.get('/class/returnClass/' + stuId + '/' + courseId)
         .then(function (response) {
           if (response.data) {
             // 删除已选课程列表中的这一行
@@ -113,7 +113,7 @@
         });
   }
 
-  // axios.get('/getMyClass/' + stuId)
+  // axios.get('/class/getMyClass/' + stuId)
   //     .then(function (response) {
   //         if (response.data != null) {
   //             for (let course of response.data) {
@@ -127,7 +127,7 @@
   //       console.log(error);
   //     });
   //
-  // axios.get('/getOtherClass/' + stuId)
+  // axios.get('/class/getOtherClass/' + stuId)
   //     .then(function (response) {
   //       if (response.data != null) {
   //           for (let course of response.data) {

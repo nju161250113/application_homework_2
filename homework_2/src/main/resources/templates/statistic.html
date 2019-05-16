@@ -3,8 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>学生选课统计</title>
+
+    <link type="text/css" href="/css/table.css" rel="stylesheet">
+    <link type="text/css" href="/css/statistic.css" rel="stylesheet">
 </head>
 <body>
 
+<div id="container">
+    <table class="two-column">
+        <caption>学生信息统计</caption>
+        <thead>
+        <tr>
+            <td>学生编号</td>
+            <td>学生姓名</td>
+        </tr>
+        </thead>
+
+        <tbody id="student-tbody"></tbody>
+    </table>
+
+    <table class="two-column">
+        <caption>课程信息统计</caption>
+        <thead>
+        <tr>
+            <td>课程编号</td>
+            <td>课程名称</td>
+        </tr>
+        </thead>
+
+        <tbody id="course-tbody"></tbody>
+    </table>
+
+    <table class="four-column">
+        <caption>选课信息统计</caption>
+        <thead>
+        <tr>
+            <td>学生编号</td>
+            <td>学生姓名</td>
+            <td>课程编号</td>
+            <td>课程名称</td>
+        </tr>
+        </thead>
+
+        <tbody id="select-tbody"></tbody>
+    </table>
+</div>
+
+<script src="/js/statistic.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </body>
 </html>
