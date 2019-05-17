@@ -18,8 +18,10 @@ public class CourseServiceImpl implements CourseService {
     @Autowired
     @Qualifier("courseDaoMySQLImpl")
     CourseDao Acd;
+    @Autowired
     @Qualifier("courseDaoOracleImpl")
     CourseDao Bcd;
+    @Autowired
     @Qualifier("courseDaoSQLServerImpl")
     CourseDao Ccd;
     @Override
