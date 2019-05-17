@@ -1,4 +1,5 @@
 package com.example.homework_2.configure;
+
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -15,8 +16,6 @@ public class DataSourceConfig {
 
 
     //mysql库
-
-
     @Primary
     @Bean(name = "mysqlDataSource")
     @Qualifier("mysqlDataSource")
@@ -30,6 +29,15 @@ public class DataSourceConfig {
     @Qualifier("oracleDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.oracle")
     public DataSource oracleDataSource() {
+        return DataSourceBuilder.create().build();
+    }
+
+    //sqlserver数据库
+    @Primary
+    @Bean(name = "sqlserverDataSource")
+    @Qualifier("sqlserverDataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.sqlserver")
+    public DataSource sqlserverDataSource() {
         return DataSourceBuilder.create().build();
     }
 
