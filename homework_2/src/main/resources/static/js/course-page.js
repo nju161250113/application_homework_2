@@ -31,7 +31,7 @@
   }
   
   
-  function addCourseRow(courseId, courseName, tbody, btnText, onclick, disabled) {
+  function addCourseRow(courseId, courseName, tbody, btnText, onclick) {
     let row = tbody.insertRow(-1);
     let cell1 = row.insertCell(-1);
     let cell2 = row.insertCell(-1);
@@ -42,38 +42,36 @@
     btn.innerText = btnText;
     
     btn.addEventListener('click', onclick, false);
-
-    btn.disabled = disabled;
   
     cell1.appendChild(id);
     cell2.appendChild(name);
     cell3.appendChild(btn);
     
   }
-  
-  function toggleBtn(tbody, disabled, courseId) {
-    let rows = allCoursesTBody.rows;
 
-    for (let row of rows) {
-      let td = row.firstChild,
-          id = td.innerText;
+  function removeCourseRow(courseId, tbody) {
+      let rows = tbody.rows;
 
-      if (id === courseId.toString()) {
-        let btn = row.children[2].firstChild;
-        btn.disabled = disabled;
-        break;
+      for (let row of rows) {
+          let td = row.firstChild,
+              id = td.innerText;
+
+          if (id === courseId.toString()) {
+              row.remove();
+              break;
+          }
       }
-    }
   }
-  
-  
+
   function chooseCourse(courseId, courseName) {
     axios.get('/class/selectClass/' + stuId + '/' + courseId)
         .then(function (response) {
           if (response.data) {
-            addCourseRow(courseId, courseName, myCoursesTBody, '退选', removeCourse.bind(this, courseId), false);
-  
-            toggleBtn(allCoursesTBody, true, courseId);
+            // 把课程增加到一选课程列表中
+            addCourseRow(courseId, courseName, myCoursesTBody, '退选', removeCourse.bind(this, courseId, courseName));
+
+            // 把课程从其他课程列表中移除
+            removeCourseRow(courseId, allCoursesTBody);
           } else {
             alert('选课失败');
           }
@@ -84,25 +82,15 @@
         });
   }
   
-  function removeCourse(courseId) {
+  function removeCourse(courseId, courseName) {
     axios.get('/class/returnClass/' + stuId + '/' + courseId)
         .then(function (response) {
           if (response.data) {
             // 删除已选课程列表中的这一行
-            let rows = myCoursesTBody.rows;
-
-            for (let row of rows) {
-              let td = row.firstChild,
-                  id = td.innerText;
-    
-              if (id === courseId.toString()) {
-                row.remove();
-                break;
-              }
-            }
+            removeCourseRow(courseId, myCoursesTBody);
   
-            // 恢复所有课程列表中这门课的按钮
-            toggleBtn(allCoursesTBody, false, courseId);
+            // 把这门课添加到其他课程列表中
+              addCourseRow(courseId, courseName, allCoursesTBody, '选择', chooseCourse.bind(this, courseId, courseName));
           } else {
             alert('退选失败');
           }
@@ -113,34 +101,34 @@
         });
   }
 
-  // axios.get('/class/getMyClass/' + stuId)
-  //     .then(function (response) {
-  //         if (response.data != null) {
-  //             for (let course of response.data) {
-  //                 addCourseRow(course.courseId, course.courseName, myCoursesTBody, '退选',
-  //                     removeCourse.bind(this, course.id), false);
-  //             }
-  //         }
-  //     })
-  //     .catch(function (error) {
-  //       alert('网络错误');
-  //       console.log(error);
-  //     });
-  //
-  // axios.get('/class/getOtherClass/' + stuId)
-  //     .then(function (response) {
-  //       if (response.data != null) {
-  //           for (let course of response.data) {
-  //               addCourseRow(course.courseId, course.courseName, allCoursesTBody, '选择',
-  //                   chooseCourse.bind(this, course.courseId, course.courseName), course.select);
-  //           }
-  //       }
-  //
-  //     })
-  //     .catch(function (error) {
-  //       alert('网络错误');
-  //       console.log(error);
-  //     });
+  axios.get('/class/getMyClass/' + stuId)
+      .then(function (response) {
+          if (response.data != null) {
+              for (let course of response.data) {
+                  addCourseRow(course.courseId, course.courseName, myCoursesTBody, '退选',
+                      removeCourse.bind(this, course.courseId, course.courseName), false);
+              }
+          }
+      })
+      .catch(function (error) {
+        alert('网络错误');
+        console.log(error);
+      });
+
+  axios.get('/class/getOtherClass/' + stuId)
+      .then(function (response) {
+        if (response.data != null) {
+            for (let course of response.data) {
+                addCourseRow(course.courseId, course.courseName, allCoursesTBody, '选择',
+                    chooseCourse.bind(this, course.courseId, course.courseName), course.select);
+            }
+        }
+
+      })
+      .catch(function (error) {
+        alert('网络错误');
+        console.log(error);
+      });
   
   
 })();
