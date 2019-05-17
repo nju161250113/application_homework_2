@@ -1,12 +1,12 @@
 package com.example.homework_2.oracle.repository;
 
-import com.example.homework_2.oracle.entity.Student;
+import com.example.homework_2.oracle.entity.BStudent;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface StudentRepository extends CrudRepository<Student,Integer> {
+public interface StudentRepository extends CrudRepository<BStudent,Integer> {
 
-    Student findById(String id);
-    List<Student> findAll();
+    BStudent findById(String id);
+    List<BStudent> findAll();
 }
