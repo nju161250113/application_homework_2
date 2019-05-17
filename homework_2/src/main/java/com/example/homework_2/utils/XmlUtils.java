@@ -1,7 +1,5 @@
 package com.example.homework_2.utils;
 
-import com.example.homework_2.model.StuCourse;
-import com.example.homework_2.oracle.entity.Student;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 

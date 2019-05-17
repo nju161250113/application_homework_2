@@ -1,6 +1,6 @@
 package com.example.homework_2;
 
-import com.example.homework_2.oracle.entity.Student;
+import com.example.homework_2.oracle.entity.BStudent;
 //import com.example.homework_2.mysql.repository.StudentsRepository;
 import com.example.homework_2.oracle.repository.StudentRepository;
 import org.junit.Assert;
@@ -26,7 +26,7 @@ public class Homework2ApplicationTests {
 //    }
     @Test
     public void test4(){
-        Student student = studentRepository.findById("B1");
+        BStudent student = studentRepository.findById("B1");
         Assert.assertEquals("亚瑟",student.getName());
     }
 
