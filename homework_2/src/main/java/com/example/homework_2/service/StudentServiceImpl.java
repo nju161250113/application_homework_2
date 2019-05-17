@@ -19,10 +19,10 @@ public class StudentServiceImpl implements StudentService {
     @Qualifier("studentDaoMySQLImpl")
     StudentDao Acd;
     @Autowired
-    @Qualifier("studentDaoMySQLImpl")
+    @Qualifier("studentDaoOracleImpl")
     StudentDao Bcd;
     @Autowired
-    @Qualifier("studentDaoSQLServerImpl")
+    @Qualifier("studentDaoSqlServerImpl")
     StudentDao Ccd;
     @Override
     public boolean login(String userId, String password) {

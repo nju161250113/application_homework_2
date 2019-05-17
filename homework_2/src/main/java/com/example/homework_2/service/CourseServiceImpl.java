@@ -22,7 +22,7 @@ public class CourseServiceImpl implements CourseService {
     @Qualifier("courseDaoOracleImpl")
     CourseDao Bcd;
     @Autowired
-    @Qualifier("courseDaoSQLServerImpl")
+    @Qualifier("courseDaoSqlServerImpl")
     CourseDao Ccd;
     @Override
     public boolean selectCourse(String courseId, String userId) {
