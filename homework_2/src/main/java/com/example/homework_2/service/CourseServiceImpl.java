@@ -18,6 +18,10 @@ public class CourseServiceImpl implements CourseService {
     @Autowired
     @Qualifier("courseDaoMySQLImpl")
     CourseDao Acd;
+    @Qualifier("courseDaoOracleImpl")
+    CourseDao Bcd;
+    @Qualifier("courseDaoSQLServerImpl")
+    CourseDao Ccd;
     @Override
     public boolean selectCourse(String courseId, String userId) {
         String academyInfo=getAcademyOfCourse(courseId);
@@ -27,10 +31,10 @@ public class CourseServiceImpl implements CourseService {
                 Acd.selectCourse(userId,courseId);
             }
             if(academy[i].equals(B)){
-                Acd.selectCourse(userId,courseId);
+                Bcd.selectCourse(userId,courseId);
             }
             if(academy[i].equals(C)){
-                Acd.selectCourse(userId,courseId);
+                Ccd.selectCourse(userId,courseId);
             }
         }
         return true;
@@ -45,10 +49,10 @@ public class CourseServiceImpl implements CourseService {
                 Acd.returnCourse(userId,courseId);
             }
             if(academy[i].equals(B)){
-                Acd.returnCourse(userId,courseId);
+                Bcd.returnCourse(userId,courseId);
             }
             if(academy[i].equals(C)){
-                Acd.returnCourse(userId,courseId);
+                Ccd.returnCourse(userId,courseId);
             }
         }
         return true;
@@ -95,16 +99,13 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public ArrayList<DetailStuCourse> getAllSelect() {
-        ArrayList<StuCourse>list=new ArrayList<>();
+        ArrayList<StuCourse>listA= (ArrayList<StuCourse>) XmlUtils.xmlToList(StuCourse.class,Acd.getAllSelect());
+        ArrayList<StuCourse>listB= (ArrayList<StuCourse>) XmlUtils.xmlToList(StuCourse.class,Bcd.getAllSelect());
+        ArrayList<StuCourse>listC= (ArrayList<StuCourse>) XmlUtils.xmlToList(StuCourse.class,Ccd.getAllSelect());
         ArrayList<DetailStuCourse>result=new ArrayList<>();
-        ArrayList<Course>courses=getAll();
-        StudentService ss=new StudentServiceImpl();
-        ArrayList<Student>students=ss.getAll();
-        for(int i=0;i<list.size();i++){
-            StuCourse sc=list.get(i);
-            DetailStuCourse dsc=new DetailStuCourse(sc.getStudentId(),findStuName(students,sc.getStudentId()),sc.getCourseId(),findCourseName(courses,sc.getCourseId()));
-            result.add(dsc);
-        }
+        addDetail(result,listA);
+        addDetail(result,listB);
+        addDetail(result,listC);
         return result;
     }
     public static Course getCourse(String courseId,ArrayList<Course> list){
@@ -149,5 +150,18 @@ public class CourseServiceImpl implements CourseService {
             }
         }
         return result.equals("")?result:result.substring(0,result.length()-1);
+    }
+    public static void addDetail(ArrayList<DetailStuCourse>result,ArrayList<StuCourse>list){
+        CourseService cs=new CourseServiceImpl();
+        ArrayList<Course>courses=cs.getAll();
+        StudentService ss=new StudentServiceImpl();
+        ArrayList<Student>students=ss.getAll();
+        for(int i=0;i<list.size();i++){
+            StuCourse sc=list.get(i);
+            DetailStuCourse dsc=new DetailStuCourse(sc.getStudentId(),findStuName(students,sc.getStudentId()),sc.getCourseId(),findCourseName(courses,sc.getCourseId()));
+            if(!result.contains(dsc)){
+                result.add(dsc);
+            }
+        }
     }
 }
