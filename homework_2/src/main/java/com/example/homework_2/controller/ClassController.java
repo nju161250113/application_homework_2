@@ -5,6 +5,8 @@ import com.example.homework_2.model.DetailStuCourse;
 import com.example.homework_2.model.StuCourse;
 import com.example.homework_2.service.CourseService;
 import com.example.homework_2.service.CourseServiceImpl;
+import com.example.homework_2.service.StudentService;
+import com.example.homework_2.service.StudentServiceImpl;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 @RequestMapping("/class")
 public class ClassController {
     CourseService cs=new CourseServiceImpl();
+    StudentService ss=new StudentServiceImpl();
     @RequestMapping("/getMyClass/{userId}")
     public ArrayList<Course> getMyClass(@PathVariable("userId")String userId){
         return cs.getMyCourse(userId);
@@ -25,6 +28,7 @@ public class ClassController {
     }
     @RequestMapping("/selectClass/{userId}/{courseId}")
     public boolean addClass(@PathVariable("userId")String userId,@PathVariable("courseId")String courseId){
+        ss.addStudent(userId,courseId);
         return cs.selectCourse(courseId,userId);
     }
     @RequestMapping("/returnClass/{userId}/{courseId}")

@@ -18,6 +18,12 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     @Qualifier("studentDaoMySQLImpl")
     StudentDao Acd;
+    @Autowired
+    @Qualifier("studentDaoMySQLImpl")
+    StudentDao Bcd;
+    @Autowired
+    @Qualifier("studentDaoSQLServerImpl")
+    StudentDao Ccd;
     @Override
     public boolean login(String userId, String password) {
         ArrayList<Student>list=new ArrayList<>();
@@ -25,10 +31,10 @@ public class StudentServiceImpl implements StudentService {
             list= (ArrayList<Student>) xu.xmlToList(Student.class,Acd.getAllStudent());
         }
         else if(userId.startsWith((B))){
-
+            list= (ArrayList<Student>) xu.xmlToList(Student.class,Bcd.getAllStudent());
         }
         else if(userId.startsWith(C)){
-
+            list= (ArrayList<Student>) xu.xmlToList(Student.class,Ccd.getAllStudent());
         }else{
             return false;
         }
@@ -43,18 +49,26 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public boolean addStudent(String userId, String name,String courseId) {
+    public boolean addStudent(String userId,String courseId) {
         String academyInfo=getAcademyOfCourse(courseId);
         String[] academy=academyInfo.split("_");
+        StudentService ss=new StudentServiceImpl();
+        ArrayList<Student>students=ss.getAll();
+        String name="";
+        for(int i=0;i<students.size();i++){
+            if(students.get(i).getUserId().equals(userId)){
+                name=students.get(i).getName();
+            }
+        }
         for(int i=0;i<academy.length;i++){
             if(academy[i].equals(A)){
                 Acd.addStudent(userId,name);
             }
             if(academy[i].equals(B)){
-                Acd.addStudent(userId,name);
+                Bcd.addStudent(userId,name);
             }
             if(academy[i].equals(C)){
-                Acd.addStudent(userId,name);
+                Ccd.addStudent(userId,name);
             }
         }
         return true;
@@ -63,9 +77,9 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public ArrayList<Student> getAll() {
         ArrayList<Student>result=new ArrayList<>();
-        ArrayList<Student>listA = (ArrayList<Student>) xu.xmlToList(Student.class,Acd.getAllStudent());
-        ArrayList<Student>listB=new ArrayList<>();
-        ArrayList<Student>listC=new ArrayList<>();
+        ArrayList<Student>listA=(ArrayList<Student>) xu.xmlToList(Student.class,Acd.getAllStudent());
+        ArrayList<Student>listB=(ArrayList<Student>) xu.xmlToList(Student.class,Bcd.getAllStudent());
+        ArrayList<Student>listC=(ArrayList<Student>) xu.xmlToList(Student.class,Ccd.getAllStudent());;
         add(result,listA);
         add(result,listB);
         add(result,listC);

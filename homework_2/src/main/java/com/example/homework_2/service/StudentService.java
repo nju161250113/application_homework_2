@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public interface StudentService {
     public boolean login(String userId,String password);
 
-    public boolean addStudent(String userId,String name,String courseId);
+    public boolean addStudent(String userId,String courseId);
 
     public ArrayList<Student> getAll();
 }
