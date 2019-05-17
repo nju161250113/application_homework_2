@@ -5,15 +5,14 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
-public class ChooseCourse implements Serializable {
+public class BChooseCourse implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private Timestamp datetime;
     @ManyToOne
-    private Student student;
+    private BStudent student;
     @ManyToOne
-    private Course course;
+    private BCourse course;
 
     public int getId() {
         return id;
@@ -23,27 +22,19 @@ public class ChooseCourse implements Serializable {
         this.id = id;
     }
 
-    public Timestamp getDatetime() {
-        return datetime;
-    }
-
-    public void setDatetime(Timestamp datetime) {
-        this.datetime = datetime;
-    }
-
-    public Student getStudent() {
+    public BStudent getStudent() {
         return student;
     }
 
-    public void setStudent(Student student) {
+    public void setStudent(BStudent student) {
         this.student = student;
     }
 
-    public Course getCourse() {
+    public BCourse getCourse() {
         return course;
     }
 
-    public void setCourse(Course course) {
+    public void setCourse(BCourse course) {
         this.course = course;
     }
 }

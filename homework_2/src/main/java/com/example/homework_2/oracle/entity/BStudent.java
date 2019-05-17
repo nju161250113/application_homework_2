@@ -8,17 +8,15 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Student implements Serializable {
+public class BStudent implements Serializable {
 
 
     @Id
     private String id;
-    @ManyToOne
-    private Major major;
     private String name;
     private String password;
     @OneToMany(mappedBy = "student")
-    List<ChooseCourse> chooseCourses;
+    List<BChooseCourse> chooseCourses;
     public String getId() {
         return id;
     }
@@ -33,16 +31,6 @@ public class Student implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-
-
-    public Major getMajor() {
-        return major;
-    }
-
-    public void setMajor(Major major) {
-        this.major = major;
     }
 
     public String getPassword() {
