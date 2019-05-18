@@ -56,8 +56,7 @@ public class StudentServiceImpl implements StudentService {
     public boolean addStudent(String userId,String courseId) {
         String academyInfo=getAcademyOfCourse(courseId);
         String[] academy=academyInfo.split("_");
-        StudentService ss=new StudentServiceImpl();
-        ArrayList<Student>students=ss.getAll();
+        ArrayList<Student>students=getAll();
         String name="";
         for(int i=0;i<students.size();i++){
             if(students.get(i).getUserId().equals(userId)){
