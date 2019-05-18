@@ -8,13 +8,18 @@ import com.example.homework_2.model.Student;
 import com.example.homework_2.utils.XmlUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 
+@Component
 public class CourseServiceImpl implements CourseService {
     public static String A="A";
     public static String B="B";
     public static String C="C";
+    @Autowired
+    StudentService ss;
+
     @Autowired
     @Qualifier("courseDaoMySQLImpl")
     CourseDao Acd;
@@ -66,7 +71,7 @@ public class CourseServiceImpl implements CourseService {
         ArrayList<Course>result=new ArrayList<>();
         ArrayList<DetailStuCourse> sToc=getAllSelect();
         for(int i=0;i<sToc.size();i++){
-            if(sToc.get(i).equals(userId)){
+            if(sToc.get(i).getStuId().equals(userId)){
                 result.add(getCourse(sToc.get(i).getCourseId(),list));
             }
         }
@@ -110,7 +115,7 @@ public class CourseServiceImpl implements CourseService {
         addDetail(result,listC);
         return result;
     }
-    public static Course getCourse(String courseId,ArrayList<Course> list){
+    public  Course getCourse(String courseId,ArrayList<Course> list){
         for(int i=0;i<list.size();i++){
             if(list.get(i).getCourseId().equals(courseId)){
                 return list.get(i);
@@ -118,7 +123,7 @@ public class CourseServiceImpl implements CourseService {
         }
         return null;
     }
-    public static String findStuName(ArrayList<Student>list, String id){
+    public  String findStuName(ArrayList<Student>list, String id){
         for(int i=0;i<list.size();i++){
             if(list.get(i).getUserId().equals(id)){
                 return list.get(i).getName();
@@ -126,7 +131,7 @@ public class CourseServiceImpl implements CourseService {
         }
         return "";
     }
-    public static String findCourseName(ArrayList<Course>list, String id){
+    public  String findCourseName(ArrayList<Course>list, String id){
         for(int i=0;i<list.size();i++){
             if(list.get(i).getCourseId().equals(id)){
                 return list.get(i).getName();
@@ -134,7 +139,7 @@ public class CourseServiceImpl implements CourseService {
         }
         return "";
     }
-    public static void add(ArrayList<Course>result,ArrayList<Course>list){
+    public  void add(ArrayList<Course>result,ArrayList<Course>list){
         for(int i=0;i<list.size();i++){
             Course c=list.get(i);
             if(!result.contains(c)){
@@ -142,10 +147,9 @@ public class CourseServiceImpl implements CourseService {
             }
         }
     }
-    public static String getAcademyOfCourse(String courseId){
+    public String getAcademyOfCourse(String courseId){
         String result="";
-        CourseService cs=new CourseServiceImpl();
-        ArrayList<Course>list=cs.getAll();
+        ArrayList<Course>list=getAll();
         for(int i=0;i<list.size();i++){
             if(list.get(i).getCourseId().equals(courseId)){
                 result=result+"A_";
@@ -153,10 +157,8 @@ public class CourseServiceImpl implements CourseService {
         }
         return result.equals("")?result:result.substring(0,result.length()-1);
     }
-    public static void addDetail(ArrayList<DetailStuCourse>result,ArrayList<StuCourse>list){
-        CourseService cs=new CourseServiceImpl();
-        ArrayList<Course>courses=cs.getAll();
-        StudentService ss=new StudentServiceImpl();
+    public  void addDetail(ArrayList<DetailStuCourse>result,ArrayList<StuCourse>list){
+        ArrayList<Course>courses=getAll();
         ArrayList<Student>students=ss.getAll();
         for(int i=0;i<list.size();i++){
             StuCourse sc=list.get(i);

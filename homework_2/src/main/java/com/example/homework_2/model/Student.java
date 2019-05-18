@@ -14,7 +14,9 @@ public class Student {
     public Student(String userId,String password,String name,String academy){
         this.userId=userId;
         this.password=password;
+        this.name=name;
         this.academy=academy;
+
     }
     public void setUserId(String userId){this.userId=userId;}
     public void setPassword(String password){this.password=password;}

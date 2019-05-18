@@ -7,14 +7,18 @@ import com.example.homework_2.model.Student;
 import com.example.homework_2.utils.XmlUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 
+@Component
 public class StudentServiceImpl implements StudentService {
     public static String A="A";
     public static String B="B";
     public static String C="C";
-    XmlUtils xu=new XmlUtils();
+    @Autowired
+    CourseService cs;
+
     @Autowired
     @Qualifier("studentDaoMySQLImpl")
     StudentDao Acd;
@@ -28,13 +32,13 @@ public class StudentServiceImpl implements StudentService {
     public boolean login(String userId, String password) {
         ArrayList<Student>list=new ArrayList<>();
         if(userId.startsWith(A)){
-            list= (ArrayList<Student>) xu.xmlToList(Student.class,Acd.getAllStudent());
+            list= (ArrayList<Student>) XmlUtils.xmlToList(Student.class,Acd.getAllStudent());
         }
         else if(userId.startsWith((B))){
-            list= (ArrayList<Student>) xu.xmlToList(Student.class,Bcd.getAllStudent());
+            list= (ArrayList<Student>) XmlUtils.xmlToList(Student.class,Bcd.getAllStudent());
         }
         else if(userId.startsWith(C)){
-            list= (ArrayList<Student>) xu.xmlToList(Student.class,Ccd.getAllStudent());
+            list= (ArrayList<Student>) XmlUtils.xmlToList(Student.class,Ccd.getAllStudent());
         }else{
             return false;
         }
@@ -52,12 +56,12 @@ public class StudentServiceImpl implements StudentService {
     public boolean addStudent(String userId,String courseId) {
         String academyInfo=getAcademyOfCourse(courseId);
         String[] academy=academyInfo.split("_");
-        StudentService ss=new StudentServiceImpl();
-        ArrayList<Student>students=ss.getAll();
+        ArrayList<Student>students=getAll();
         String name="";
         for(int i=0;i<students.size();i++){
             if(students.get(i).getUserId().equals(userId)){
                 name=students.get(i).getName();
+                break;
             }
         }
         for(int i=0;i<academy.length;i++){
@@ -77,15 +81,15 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public ArrayList<Student> getAll() {
         ArrayList<Student>result=new ArrayList<>();
-        ArrayList<Student>listA=(ArrayList<Student>) xu.xmlToList(Student.class,Acd.getAllStudent());
-        ArrayList<Student>listB=(ArrayList<Student>) xu.xmlToList(Student.class,Bcd.getAllStudent());
-        ArrayList<Student>listC=(ArrayList<Student>) xu.xmlToList(Student.class,Ccd.getAllStudent());;
+        ArrayList<Student>listA=(ArrayList<Student>) XmlUtils.xmlToList(Student.class,Acd.getAllStudent());
+        ArrayList<Student>listB=(ArrayList<Student>) XmlUtils.xmlToList(Student.class,Bcd.getAllStudent());
+        ArrayList<Student>listC=(ArrayList<Student>) XmlUtils.xmlToList(Student.class,Ccd.getAllStudent());;
         add(result,listA);
         add(result,listB);
         add(result,listC);
         return result;
     }
-    public static boolean isValidate(ArrayList<Student>list,String userId,String password){
+    public boolean isValidate(ArrayList<Student>list,String userId,String password){
         for(int i=0;i<list.size();i++){
             if(list.get(i).getUserId().equals(userId)&&list.get(i).getPassword().equals(password)){
                 return true;
@@ -93,9 +97,8 @@ public class StudentServiceImpl implements StudentService {
         }
         return false;
     }
-    public static String getAcademyOfCourse(String courseId){
+    public String getAcademyOfCourse(String courseId){
         String result="";
-        CourseService cs=new CourseServiceImpl();
         ArrayList<Course>list=cs.getAll();
         for(int i=0;i<list.size();i++){
             if(list.get(i).getCourseId().equals(courseId)){

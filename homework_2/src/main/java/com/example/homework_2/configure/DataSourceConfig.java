@@ -33,9 +33,8 @@ public class DataSourceConfig {
     }
 
     //sqlserver数据库
-    @Primary
-    @Bean(name = "sqlserverDataSource")
-    @Qualifier("sqlserverDataSource")
+    @Bean(name = "sqlServerDataSource")
+    @Qualifier("sqlServerDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.sqlserver")
     public DataSource sqlserverDataSource() {
         return DataSourceBuilder.create().build();

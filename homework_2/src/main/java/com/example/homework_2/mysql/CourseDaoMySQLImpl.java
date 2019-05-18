@@ -29,7 +29,7 @@ public class CourseDaoMySQLImpl implements CourseDao {
         Iterator it = rows.iterator();
         while(it.hasNext()) {
             Map m=(Map)it.next();
-            Course course=new Course((String)m.get("courseNumber"),(String)m.get("name"));
+            Course course=new Course((String)m.get("number"),(String)m.get("name"));
             list.add(course);
         }
         return XmlUtils.toXml(list);

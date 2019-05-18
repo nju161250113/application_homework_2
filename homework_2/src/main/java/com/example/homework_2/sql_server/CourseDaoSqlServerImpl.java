@@ -18,7 +18,7 @@ import java.util.Map;
 @Qualifier("courseDaoSqlServerImpl")
 public class CourseDaoSqlServerImpl implements CourseDao {
     @Autowired
-    @Qualifier("sqlserverJdbcTemplate")
+    @Qualifier("sqlServerJdbcTemplate")
     protected JdbcTemplate jdbcTemplate;
 
     @Override

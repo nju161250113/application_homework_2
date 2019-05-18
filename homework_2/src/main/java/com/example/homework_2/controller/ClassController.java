@@ -7,6 +7,7 @@ import com.example.homework_2.service.CourseService;
 import com.example.homework_2.service.CourseServiceImpl;
 import com.example.homework_2.service.StudentService;
 import com.example.homework_2.service.StudentServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,8 +17,10 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("/class")
 public class ClassController {
-    CourseService cs=new CourseServiceImpl();
-    StudentService ss=new StudentServiceImpl();
+    @Autowired
+    CourseService cs;
+    @Autowired
+    StudentService ss;
     @RequestMapping("/getMyClass/{userId}")
     public ArrayList<Course> getMyClass(@PathVariable("userId")String userId){
         return cs.getMyCourse(userId);

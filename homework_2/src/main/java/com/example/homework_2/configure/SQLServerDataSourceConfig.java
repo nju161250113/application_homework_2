@@ -12,9 +12,9 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 public class SQLServerDataSourceConfig {
-    @Bean(name = "sqlserverTemplate")
-    public JdbcTemplate sqlserverJdbcTemplate(
-            @Qualifier("sqlserverDataSource") DataSource dataSource) {
+    @Bean(name = "sqlServerJdbcTemplate")
+    public JdbcTemplate sqlServerJdbcTemplate(
+            @Qualifier("sqlServerDataSource") DataSource dataSource) {
         return new JdbcTemplate(dataSource);
     }
 }

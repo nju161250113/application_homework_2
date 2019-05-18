@@ -6,15 +6,19 @@ import com.example.homework_2.utils.XmlUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+
+@Component("studentDaoSqlServerImpl")
+@Qualifier("studentDaoSqlServerImpl")
 public class StudentDaoSqlServerImpl implements StudentDao {
     @Autowired
-    @Qualifier("sqlserverJdbcTemplate")
+    @Qualifier("sqlServerJdbcTemplate")
     protected JdbcTemplate jdbcTemplate;
 
     @Override
