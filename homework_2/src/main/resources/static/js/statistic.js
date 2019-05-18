@@ -6,7 +6,7 @@
           courseTBody = document.getElementById('course-tbody'),
           selectTBody = document.getElementById('select-tbody');
 
-    axios.get('/student/getAll/')
+    axios.get('/student/getAll')
         .then(function (response) {
             if (response.data != null) {
                 for (let stu of response.data) {
@@ -26,7 +26,7 @@
           console.log(error);
         });
 
-    axios.get('/class/getAll/')
+    axios.get('/class/getAll')
         .then(function (response) {
           if (response.data != null) {
               for (let course of response.data) {
@@ -47,7 +47,7 @@
           console.log(error);
         });
 
-    axios.get('/class/getAllSelect/')
+    axios.get('/class/getAllSelect')
         .then(function (response) {
             if (response.data != null) {
                 for (let detail of response.data) {
