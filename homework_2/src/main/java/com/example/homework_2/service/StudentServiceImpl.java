@@ -56,28 +56,39 @@ public class StudentServiceImpl implements StudentService {
     public boolean addStudent(String userId,String courseId) {
         String academyInfo=getAcademyOfCourse(courseId);
         String[] academy=academyInfo.split("_");
-        ArrayList<Student>students=getAll();
+        StudentService ss=new StudentServiceImpl();
+        ArrayList<Student>students=ss.getAll();
         String name="";
         for(int i=0;i<students.size();i++){
             if(students.get(i).getUserId().equals(userId)){
                 name=students.get(i).getName();
-                break;
             }
         }
         for(int i=0;i<academy.length;i++){
             if(academy[i].equals(A)){
-                Acd.addStudent(userId,name);
+                ArrayList<Student> list = (ArrayList<Student>) XmlUtils.xmlToList(Student.class, Acd.getAllStudent());
+                boolean isIn=isIn(list,userId);
+                if(!isIn){
+                    Acd.addStudent(userId,name);
+                }
             }
             if(academy[i].equals(B)){
-                Bcd.addStudent(userId,name);
+                ArrayList<Student> list = (ArrayList<Student>) XmlUtils.xmlToList(Student.class, Bcd.getAllStudent());
+                boolean isIn=isIn(list,userId);
+                if(!isIn){
+                    Bcd.addStudent(userId,name);
+                }
             }
             if(academy[i].equals(C)){
-                Ccd.addStudent(userId,name);
+                ArrayList<Student> list = (ArrayList<Student>) XmlUtils.xmlToList(Student.class, Ccd.getAllStudent());
+                boolean isIn=isIn(list,userId);
+                if(!isIn){
+                    Ccd.addStudent(userId,name);
+                }
             }
         }
         return true;
     }
-
     @Override
     public ArrayList<Student> getAll() {
         ArrayList<Student>result=new ArrayList<>();
@@ -107,13 +118,22 @@ public class StudentServiceImpl implements StudentService {
         }
         return result.equals("")?result:result.substring(0,result.length()-1);
     }
-    public static void add(ArrayList<Student>result,ArrayList<Student>list){
+    public void add(ArrayList<Student>result,ArrayList<Student>list){
         for(int i=0;i<list.size();i++){
             Student st=list.get(i);
             if(!result.contains(st)){
                 result.add(st);
             }
         }
+    }
+    public boolean isIn(ArrayList<Student>list,String userId){
+        boolean isIn=false;
+        for(int j=0;j<list.size();j++){
+            if(list.get(j).getUserId().equals(userId)){
+                isIn=true;;
+            }
+        }
+        return isIn;
     }
 
 }
