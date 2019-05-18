@@ -14,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component("courseDaoOracleImpl")
@@ -40,6 +42,7 @@ public class CourseDaoOracleImpl implements CourseDao {
     @Override
     public boolean selectCourse(String userId, String courseId) {
         BChooseCourse bChooseCourse = new BChooseCourse();
+        bChooseCourse.setId(createOrdercheckId());
         bChooseCourse.setStudent(studentRepository.findById(userId));
         bChooseCourse.setCourse(courseRepository.findById(courseId));
         chooseCourseRepository.save(bChooseCourse);
@@ -63,5 +66,16 @@ public class CourseDaoOracleImpl implements CourseDao {
             list.add(stuCourse);
         }
         return XmlUtils.toXml(list);
+    }
+    private String createOrdercheckId(){
+        String id="";
+        //获取当前时间戳
+        SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String temp = sf.format(new Date());
+        //获取随机数
+        int random=(int) ((Math.random()+1)*1000);
+        id=temp+random;
+        return id;
+
     }
 }
