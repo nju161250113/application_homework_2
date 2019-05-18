@@ -6,7 +6,6 @@ import com.example.homework_2.model.StuCourse;
 import com.example.homework_2.utils.XmlUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -37,7 +36,7 @@ public class CourseDaoMySQLImpl implements CourseDao {
 
     @Override
     public boolean selectCourse(String userId, String courseId) {
-        int res=jdbcTemplate.update("insert  into stucourses(studentNumber, courseNumber) where values(?,?)",userId,courseId);
+        int res=jdbcTemplate.update("insert  into stucourses(studentNumber, courseNumber) values(?,?)",userId,courseId);
         return res>0;
     }
 
