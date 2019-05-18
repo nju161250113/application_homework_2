@@ -140,7 +140,13 @@ public class StudentServiceImpl implements StudentService {
     public void add(ArrayList<Student>result,ArrayList<Student>list){
         for(int i=0;i<list.size();i++){
             Student st=list.get(i);
-            if(!result.contains(st)){
+            boolean isIn=false;
+            for(int j=0;j<result.size();j++){
+                if(result.get(j).getUserId().equals(st.getUserId())){
+                    isIn=true;
+                }
+            }
+            if(!isIn){
                 result.add(st);
             }
         }
