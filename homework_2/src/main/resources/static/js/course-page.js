@@ -105,8 +105,8 @@
       .then(function (response) {
           if (response.data != null) {
               for (let course of response.data) {
-                  addCourseRow(course.courseId, course.courseName, myCoursesTBody, '退选',
-                      removeCourse.bind(this, course.courseId, course.courseName), false);
+                  addCourseRow(course.courseId, course.name, myCoursesTBody, '退选',
+                      removeCourse.bind(this, course.courseId, course.name), false);
               }
           }
       })
@@ -119,8 +119,8 @@
       .then(function (response) {
         if (response.data != null) {
             for (let course of response.data) {
-                addCourseRow(course.courseId, course.courseName, allCoursesTBody, '选择',
-                    chooseCourse.bind(this, course.courseId, course.courseName), course.select);
+                addCourseRow(course.courseId, course.name, allCoursesTBody, '选择',
+                    chooseCourse.bind(this, course.courseId, course.name), course.select);
             }
         }
 
