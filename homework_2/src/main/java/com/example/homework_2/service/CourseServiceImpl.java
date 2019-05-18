@@ -162,10 +162,22 @@ public class CourseServiceImpl implements CourseService {
     }
     public String getAcademyOfCourse(String courseId){
         String result="";
-        ArrayList<Course>list=getAll();
-        for(int i=0;i<list.size();i++){
-            if(list.get(i).getCourseId().equals(courseId)){
+        ArrayList<Course>listA= (ArrayList<Course>) XmlUtils.xmlToList(Course.class,Acd.getAllCourse());
+        ArrayList<Course>listB= (ArrayList<Course>) XmlUtils.xmlToList(Course.class,Bcd.getAllCourse());
+        ArrayList<Course>listC= (ArrayList<Course>) XmlUtils.xmlToList(Course.class,Ccd.getAllCourse());
+        for(int i=0;i<listA.size();i++){
+            if(listA.get(i).getCourseId().equals(courseId)){
                 result=result+"A_";
+            }
+        }
+        for(int i=0;i<listB.size();i++){
+            if(listB.get(i).getCourseId().equals(courseId)){
+                result=result+"B_";
+            }
+        }
+        for(int i=0;i<listC.size();i++){
+            if(listC.get(i).getCourseId().equals(courseId)){
+                result=result+"C_";
             }
         }
         return result.equals("")?result:result.substring(0,result.length()-1);
