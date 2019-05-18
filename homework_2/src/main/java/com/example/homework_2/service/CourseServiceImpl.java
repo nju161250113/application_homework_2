@@ -187,8 +187,15 @@ public class CourseServiceImpl implements CourseService {
         ArrayList<Student>students=ss.getAll();
         for(int i=0;i<list.size();i++){
             StuCourse sc=list.get(i);
+            boolean isIn=false;
             DetailStuCourse dsc=new DetailStuCourse(sc.getStudentId(),findStuName(students,sc.getStudentId()),sc.getCourseId(),findCourseName(courses,sc.getCourseId()));
-            if(!result.contains(dsc)){
+            for(int j=0;j<result.size();j++){
+                DetailStuCourse d=result.get(j);
+                if(d.getCourseId().equals(sc.getCourseId())&&d.getStuId().equals(sc.getStudentId())){
+                    isIn=true;
+                }
+            }
+            if(!isIn){
                 result.add(dsc);
             }
         }
