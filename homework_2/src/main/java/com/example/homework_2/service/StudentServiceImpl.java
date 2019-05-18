@@ -130,8 +130,8 @@ public class StudentServiceImpl implements StudentService {
                 result=result+"B_";
             }
         }
-        for(int i=0;i<listA.size();i++){
-            if(listA.get(i).getCourseId().equals(courseId)){
+        for(int i=0;i<listC.size();i++){
+            if(listC.get(i).getCourseId().equals(courseId)){
                 result=result+"C_";
             }
         }
