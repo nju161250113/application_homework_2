@@ -148,7 +148,14 @@ public class CourseServiceImpl implements CourseService {
     public  void add(ArrayList<Course>result,ArrayList<Course>list){
         for(int i=0;i<list.size();i++){
             Course c=list.get(i);
-            if(!result.contains(c)){
+            boolean isIn=false;
+            for(int j=0;j<result.size();j++){
+
+                if(c.getCourseId().equals(result.get(j).getCourseId())){
+                    isIn=true;
+                }
+            }
+            if(!isIn){
                 result.add(c);
             }
         }
