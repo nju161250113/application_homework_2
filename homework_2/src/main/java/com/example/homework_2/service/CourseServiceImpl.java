@@ -85,7 +85,13 @@ public class CourseServiceImpl implements CourseService {
         ArrayList<Course>my=getMyCourse(userId);
         for(int i=0;i<list.size();i++){
             Course c=list.get(i);
-            if(!my.contains(c)){
+            boolean isIn=false;
+            for(int j=0;j<my.size();j++){
+                if(my.get(j).getCourseId().equals(c.getCourseId())){
+                    isIn=true;
+                }
+            }
+            if(!isIn){
                 result.add(c);
             }
         }
