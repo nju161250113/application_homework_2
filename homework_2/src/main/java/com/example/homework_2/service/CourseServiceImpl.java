@@ -102,8 +102,8 @@ public class CourseServiceImpl implements CourseService {
     public ArrayList<Course> getAll() {
         ArrayList<Course>result=new ArrayList<>();
         ArrayList<Course>courseA= (ArrayList<Course>) XmlUtils.xmlToList(Course.class,Acd.getAllCourse());
-        ArrayList<Course>courseB=new ArrayList<>();
-        ArrayList<Course>courseC=new ArrayList<>();
+        ArrayList<Course>courseB= (ArrayList<Course>) XmlUtils.xmlToList(Course.class,Bcd.getAllCourse());
+        ArrayList<Course>courseC= (ArrayList<Course>) XmlUtils.xmlToList(Course.class,Ccd.getAllCourse());
         add(result,courseA);
         add(result,courseB);
         add(result,courseC);
