@@ -18,7 +18,15 @@ public class StudentServiceImpl implements StudentService {
     public static String C="C";
     @Autowired
     CourseService cs;
-
+    @Autowired
+    @Qualifier("courseDaoMySQLImpl")
+    CourseDao ACd;
+    @Autowired
+    @Qualifier("courseDaoOracleImpl")
+    CourseDao BCd;
+    @Autowired
+    @Qualifier("courseDaoSqlServerImpl")
+    CourseDao CCd;
     @Autowired
     @Qualifier("studentDaoMySQLImpl")
     StudentDao Acd;
@@ -109,10 +117,22 @@ public class StudentServiceImpl implements StudentService {
     }
     public String getAcademyOfCourse(String courseId){
         String result="";
-        ArrayList<Course>list=cs.getAll();
-        for(int i=0;i<list.size();i++){
-            if(list.get(i).getCourseId().equals(courseId)){
+        ArrayList<Course>listA= (ArrayList<Course>) XmlUtils.xmlToList(Course.class,ACd.getAllCourse());
+        ArrayList<Course>listB= (ArrayList<Course>) XmlUtils.xmlToList(Course.class,BCd.getAllCourse());
+        ArrayList<Course>listC= (ArrayList<Course>) XmlUtils.xmlToList(Course.class,CCd.getAllCourse());
+        for(int i=0;i<listA.size();i++){
+            if(listA.get(i).getCourseId().equals(courseId)){
                 result=result+"A_";
+            }
+        }
+        for(int i=0;i<listB.size();i++){
+            if(listB.get(i).getCourseId().equals(courseId)){
+                result=result+"B_";
+            }
+        }
+        for(int i=0;i<listA.size();i++){
+            if(listA.get(i).getCourseId().equals(courseId)){
+                result=result+"C_";
             }
         }
         return result.equals("")?result:result.substring(0,result.length()-1);
